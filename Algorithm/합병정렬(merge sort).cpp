@@ -3,15 +3,8 @@
 using namespace std;
 int number[1000000];
 
-void swap(int &a, int &b) {
-    int temp = a;
-    a = b;
-    b = temp;
-}
-
-
 // 합병정렬
-void merge(int *array, int p, int q, int r) {
+void merge(int array[], int p, int q, int r) {
     int n1 = q - p + 1;
     int n2 = r - q;
     int L[n1], R[n2];
@@ -25,7 +18,7 @@ void merge(int *array, int p, int q, int r) {
     
     int i = 0, j = 0, k = p;
     while(i < n1 && j < n2) {
-        if (L[i] < R[i]) {
+        if (L[i] < R[j]) {
             array[k++] = L[i++];
         } else {
             array[k++] = R[j++];
@@ -37,6 +30,9 @@ void merge(int *array, int p, int q, int r) {
     }
     while(j < n2) {
         array[k++] = R[j++];
+    }
+    for (int i = 0; i <= r; i++) {
+        cout << array[i] << " ";
     }
 }
 void mergeSort(int *array, int p, int r) {
