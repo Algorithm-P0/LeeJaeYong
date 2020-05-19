@@ -13,6 +13,7 @@
 
 
 
+
 ## 정렬 (sort)
 
 - 선택 정렬(selection sort)
@@ -178,7 +179,37 @@ bool myfunction (int i,int j) { return (i<j); }
 
 `heapify` 는 선택노드의 자식노드가 전부 힙인 상태에서 선택노드를 힙 자료구조로 만드는 과정을 말한다. heapify만의 시간복잡도는 O(logN)이다.
 
-```
+```c++
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
 
+void heapify(int *array, int i, int n) {
+    int index = i;
+    int leftChild = i*2+1;
+    int rightChild = i*2+2;
+    if (leftChild < n && array[leftChild] > array[index]) {
+        index = leftChild;
+    }
+    if (rightChild < n && array[rightChild] > array[index]) {
+        index = rightChild;
+    }
+    if (index != i) {
+        swap(array[index], array[i]);
+        heapify(array, index, n);
+    }
+}
+// 힙 정렬
+void heapSort(int *array, int n) {
+    for (int i = n/2-1; i >= 0; i--) {
+        heapify(array, i, n);
+    }
+    for (int i = n-1; i > 0; i--) {
+        swap(array[0], array[i]);
+        heapify(array, 0, i);
+    }
+}
 ```
 
